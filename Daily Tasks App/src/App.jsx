@@ -4,13 +4,18 @@ import './App.css'
 import data from './assets.json'
 import List from './components/List'
 import Header from './components/Header'
+import SideBar from './components/SideBar'
 
 function App() {
 
   return (
      <div className="app">
       <Header />
-     <List data={data} />
+      <div className='wrapper'>
+        <SideBar data={ data } />
+        <List data={ data } />
+      </div>
+    
 
      </div>
   )
