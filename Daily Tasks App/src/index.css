@@ -10,11 +10,34 @@ table, th, td{
 }
 
 .app {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 90%;
   min-height: 90vh;
   margin: 5px auto;
 }
+
+.wrapper {
+ display:flex;
+ min-height: 80vh;
+}
+
+.sidebar {
+  width: fit-content;
+}
+
+.list-container {
+  flex-grow: 2;
+}
+
+table {
+  width: 100%;
+  border-collapse:collapse;
+}
+table, th, td {
+  border: 1px solid;
+}
+
+
 
 .blue-highlight {
   color:aqua;
