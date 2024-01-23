@@ -4,6 +4,11 @@
   box-sizing:border-box;
 }
 
+table, th, td{
+  border: 1px solid;
+  width: 100%;
+}
+
 .app {
   /* border: 1px solid black; */
   width: 90%;
@@ -48,4 +53,9 @@ table, th, td {
 }
 .days p {
   background-color: aqua;
+}
+
+
+.blue-highlight {
+  color:aqua;
 }
