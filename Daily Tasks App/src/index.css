@@ -37,23 +37,6 @@ table, th, td {
   border: 1px solid;
 }
 
-.layout div {
-  background-color: blue;
-  width: 14%!important;
-}
-.days-container {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-}
-.days {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-.days p {
-  background-color: aqua;
-}
 
 
 .blue-highlight {

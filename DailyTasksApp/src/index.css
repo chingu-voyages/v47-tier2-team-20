@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+
+table, th, td{
+  border: 1px solid;
+  width: 100%;
+}
+
+.app {
+  /* border: 1px solid black; */
+  width: 90%;
+  min-height: 90vh;
+  margin: 5px auto;
+}
+
+.wrapper {
+ display:flex;
+ min-height: 80vh;
+}
+
+.sidebar {
+  width: fit-content;
+}
+
+.list-container {
+  flex-grow: 2;
+}
+
+table {
+  width: 100%;
+  border-collapse:collapse;
+}
+table, th, td {
+  border: 1px solid;
+}
+
+.layout div {
+  background-color: blue;
+  width: 14%!important;
+}
+.days-container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+.days {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.days p {
+  background-color: aqua;
+}
+
+
+.blue-highlight {
+  color:aqua;
+}
+<<<<<<< HEAD:Daily Tasks App/src/index.css
+=======
+.black-highlight {
+  color: #000000;
+}
+.dusty-blue-highlight {
+  color: #60affe;
+}
+.forest-green-highlight {
+  color: #006616;
+}
+.black-green-highlight {
+  color: #002107;
+}
+>>>>>>> 453c53ef9fff945b62ac7c80fca8434b75f76331:DailyTasksApp/src/index.css
