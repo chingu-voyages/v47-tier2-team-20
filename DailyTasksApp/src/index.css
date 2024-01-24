@@ -10,7 +10,6 @@ table, th, td{
 }
 
 .app {
-  /* border: 1px solid black; */
   width: 90%;
   min-height: 90vh;
   margin: 5px auto;
@@ -25,42 +24,44 @@ table, th, td{
   width: fit-content;
 }
 
-.list-container {
+/* .list-container {
   flex-grow: 2;
-}
+}  */
 
-table {
+/* table {
   width: 100%;
   border-collapse:collapse;
-}
+} */
 table, th, td {
   border: 1px solid;
 }
 
 .layout div {
   background-color: blue;
-  width: 14%!important;
+  min-width: 5%!important;
 }
 .days-container {
   display: flex;
-  flex-direction: column;
   width: fit-content;
 }
 .days {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  max-height:280px;
+  padding-top: 10px;
+
 }
 .days p {
   background-color: aqua;
+  height: 30px;
 }
 
 
 .blue-highlight {
   color:aqua;
 }
-<<<<<<< HEAD:Daily Tasks App/src/index.css
-=======
 .black-highlight {
   color: #000000;
 }
@@ -73,4 +74,3 @@ table, th, td {
 .black-green-highlight {
   color: #002107;
 }
->>>>>>> 453c53ef9fff945b62ac7c80fca8434b75f76331:DailyTasksApp/src/index.css
