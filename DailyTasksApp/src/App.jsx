@@ -5,6 +5,7 @@ import data from './assets.json'
 import List from './components/List'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
+import Footer from './components/Footer'
 // const ResponsiveGridLayout = WidthProvider(Responsive);
 
 function App() {
@@ -57,7 +58,7 @@ function App() {
         </div>
       </div>
 
-
+      <Footer />
     </div>
   )
 }

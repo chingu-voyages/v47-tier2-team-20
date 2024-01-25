@@ -3,7 +3,7 @@ import React from 'react'
 function Header() {
   return (
     <div className="header">
-        <input type='date' />
+        <h1>Daily Tasks Checklist<input type="checkbox" id="check" value="d"></input></h1>
     </div>
   )
 }
