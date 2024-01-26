@@ -43,6 +43,7 @@ function App() {
             cols={12}
             rowHeight={30}
             width={1200}
+            verticalCompact={false}
           >
             <div key="a" data-grid={{x: 0, y: 0, w: 2, maxW: 3, h:1, static:true}}>a</div>
             <div key="b" data-grid={{x: 1, y: 4, w: 3, maxW: 3, h:1, static:true}}>Saturday</div>
