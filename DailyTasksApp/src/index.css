@@ -74,3 +74,28 @@ table, th, td {
 .black-green-highlight {
   color: #002107;
 }
+/* HEADER */
+.header {
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+/* FOOTER */
+.footer {
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+.github {
+  width: 5%;
+}
+.link a {
+  color: #000000;
+  font-size: 2em;
+  text-decoration: none;
+}
+input[type=checkbox] {
+  height: 25px;
+  margin: 0 0 0 1%;
+  width: 25px;
+}
