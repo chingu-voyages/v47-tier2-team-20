@@ -8,6 +8,7 @@ import data from './assets.json'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
 import Footer from './components/Footer'
+
 // const ResponsiveGridLayout = WidthProvider(Responsive);
 const layout = [
   { i: "a", x: 0, y: 0, w: 1, h: 1 },
