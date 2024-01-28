@@ -82,13 +82,14 @@ function App() {
               // preventCollision={!this.state.compactType}
               isDroppable={true}
               draggable={true}
+              isResizable={false}
               // onDropDragOver= {(e) => ({ i: layout.length, w:2, h:1 }) }
               onDrop={onDrop}
             
 
             >
               {staticLayout.map (n => (
-                <div key={n.i} data-grid={{ x: n.x, y: n.y, w: n.w, maxW: 3, h: n.h }}>{n.i}</div>
+                <div key={n.i} data-grid={{ x: n.x, y: n.y, w: n.w, maxW: 3, h: n.h, resizable: false }}>{n.i}</div>
               ))}
               {/* <div key="a" data-grid={{ x: 0, y: 0, w: 2, maxW: 3, h: 1 }}>a</div>
               <div key="b" data-grid={{ x: 1, y: 4, w: 3, maxW: 3, h: 1 }}>Saturday</div>
