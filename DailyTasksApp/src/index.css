@@ -3,7 +3,9 @@
   padding: 0;
   box-sizing:border-box;
 }
-
+html {
+  font-size: 16px;
+}
 table, th, td{
   border: 1px solid;
   width: 100%;
@@ -77,17 +79,21 @@ table, th, td {
 /* HEADER */
 .header {
   align-items: center;
+  font-family: Open Sans;
+  font-size: 2em;
   justify-content: center;
-  padding: 0 0 0 30%;
+  padding: 0 0 0 25%;
   width: 90%;
 }
 /* FOOTER */
 .footer {
   align-items: center;
+  font-size: 1em;
   display: flex;
   font-family: Open Sans;
   justify-content: center;
-  padding: 0 0 0 30%;
+  padding: 0 0 0 20%;
+  width: 90%;
 }
 .github {
   width: 5%;
@@ -98,7 +104,7 @@ table, th, td {
   text-decoration: none;
 }
 input[type=checkbox] {
-  height: 25px;
+  height: 30px;
   margin: 0 0 0 1%;
-  width: 25px;
+  width: 30px;
 }
