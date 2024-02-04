@@ -25,17 +25,12 @@ function App() {
   const [staticLayout, setStaticLayout] = useState(layout)
   const [taskName, setTaskName] = useState("")
  
-  function getDroppingItem() {
-    return {
-      i: layout.length,
-      x: 3,
-      y: 3,
-      w: 2,
-      h: 2,
-    }
-  }
   const onDrop = (layout, layoutItem, _event) => {
     console.log(layoutItem)
+    layoutItem.isResiable = true
+    layoutItem.static = true
+    layoutItem.moved = true
+    layoutItem.resizeHandles = true
     layoutItem.i = taskName
     setStaticLayout([...staticLayout, layoutItem])
     alert(`Dropped element props:\n${JSON.stringify(layoutItem, ['x', 'y', 'w', 'h'], 2)}`);
@@ -45,6 +40,7 @@ function App() {
       <div
         className="droppable-element"
         draggable={true}
+        unselectable='on'
         // unselectable="on"
         // onDragStart={(e) => {
         //   e.dataTransfer.setData("text/plain", "");
@@ -82,13 +78,16 @@ function App() {
               // preventCollision={!this.state.compactType}
               isDroppable={true}
               draggable={true}
+              // measureBeforeMount={false}
+              preventCollision={true}
+
               // onDropDragOver= {(e) => ({ i: layout.length, w:2, h:1 }) }
               onDrop={onDrop}
-            
+      
 
             >
-              {staticLayout.map (n => (
-                <div key={n.i} data-grid={{ x: n.x, y: n.y, w: n.w, maxW: 3, h: n.h }}>{n.i}</div>
+              {staticLayout.map ((n, i) => (
+                <div key={i} data-grid={{ x: n.x, y: n.y, w: n.w, maxW: 3, h: n.h }}>{n.i}</div>
               ))}
               {/* <div key="a" data-grid={{ x: 0, y: 0, w: 2, maxW: 3, h: 1 }}>a</div>
               <div key="b" data-grid={{ x: 1, y: 4, w: 3, maxW: 3, h: 1 }}>Saturday</div>
