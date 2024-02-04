@@ -60,21 +60,23 @@ table, th, td {
   height: 30px;
 }
 
-
 .blue-highlight {
-  color:aqua;
+  background-color:aqua;
 }
 .black-highlight {
-  color: #000000;
+  background-color: #000000;
+  color: #ffffff;
 }
 .dusty-blue-highlight {
-  color: #60affe;
+  background-color: #60affe;
 }
 .forest-green-highlight {
-  color: #006616;
+  background-color: #006616;
+  color: #ffffff;
 }
 .black-green-highlight {
-  color: #002107;
+  background-color: #002107;
+  color: #ffffff;
 }
 /* HEADER */
 .header {
