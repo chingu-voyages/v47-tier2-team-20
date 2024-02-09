@@ -1,13 +1,13 @@
 import '../node_modules/react-grid-layout/css/styles.css';
 import '../node_modules/react-resizable/css/styles.css';
-import { useState } from 'react'
+import { useEffect, useState } from 'react';
 import GridLayout from "react-grid-layout";
-import './App.css'
-import data from './assets.json'
-// import List from './components/List'
-import Header from './components/Header'
-import SideBar from './components/SideBar'
-// const ResponsiveGridLayout = WidthProvider(Responsive);
+import './App.css';
+import data from './assets.json';
+import Header from './components/Header';
+import SideBar from './components/SideBar';
+import Category from './components/Category';
+
 const layout = [
   { i: "a", x: 0, y: 0, w: 1, h: 1 },
   { i: "b", x: 1, y: 0, w: 1, h: 1 },
@@ -19,10 +19,60 @@ const layout = [
   { i: "h", x: 3, y: 3, w: 1, h: 1 }
 ];
 function App() {
-  const [currentDimensions, setCurrentDimensions] = useState({ w: 5, h: 2 })
   const [staticLayout, setStaticLayout] = useState(layout)
   const [taskName, setTaskName] = useState("")
+  const [days, setDays] = useState({
+    monday: {y:0, x:0},
+    tuesday: {y:1, x:0},
+    wednesday: {y:2, x:0},
+    thursday: {y:3, x:0},
+    friday: {y:4, x:0},
+    saturday: {y:5, x:0},
+    sunday: {y:6, x:0}
+  })
+  const [tasks, setTasks] = useState([])
+
+
  
+ useEffect(() => {
+  let newArr = []
+  let taskNames = data.map(n => {
+    return n.activityTypes.map(n => {
+      return n.Tasks.map(n => {
+        if(days[n.days[0]]){
+          n.y = days[n.days[0]].y
+          n.x = days[n.days[0]].x
+          n.h = n.days.length
+          console.log('before', n)
+          // for(let day of n.days){
+          //   setDays({...days, [day]:{y: days[day].y, x: days[day].x++ }})
+          // }
+          setDays({...days, [n.days[0]]: {...days[n.days[0]], x : days[n.days[0]].x++} })
+          newArr.push(n)
+          console.log('after', n)
+        }
+        // for (let day of n.days) {
+        //   if(days[day]) {
+        //     n.y = days[day].y
+        //     n.x = days[day].x
+        //     console.log('days[day].x', days[day].x)
+        //     console.log(n)
+        //     setDays({...days, [day]:{y: days[day].y, x: days[day].x++ }})
+        //     setTasks([...tasks,n])
+        //     newArr.push(n)
+        //   }
+        // }
+      }
+      )
+    })
+  })
+console.log(newArr)
+setTasks(newArr)
+  // setTasks(taskNames)
+
+ }, [])
+
+
   const onDrop = (layout, layoutItem, _event) => {
     console.log(layoutItem)
     layoutItem.isResiable = true
@@ -39,10 +89,10 @@ function App() {
         className="droppable-element"
         draggable={true}
         unselectable='on'
-        // unselectable="on"
-        // onDragStart={(e) => {
-        //   e.dataTransfer.setData("text/plain", "");
-        // }}
+      // unselectable="on"
+      // onDragStart={(e) => {
+      //   e.dataTransfer.setData("text/plain", "");
+      // }}
       >
         (Drag me!)
       </div>
@@ -65,27 +115,18 @@ function App() {
 
             <GridLayout
               className="layout"
-              layout={layout}
+              // layout={layout}
               cols={12}
               rowHeight={30}
               width={1200}
-              // droppingItem= {{ i: "z", w: 2, h: 2 }}
-              // This turns off compaction so you can place items wherever.
               verticalCompact={false}
-              // preventCollision= {false}
-              // preventCollision={!this.state.compactType}
               isDroppable={true}
               draggable={true}
-              // measureBeforeMount={false}
               preventCollision={true}
-
-              // onDropDragOver= {(e) => ({ i: layout.length, w:2, h:1 }) }
               onDrop={onDrop}
-      
-
             >
-              {staticLayout.map ((n, i) => (
-                <div key={i} data-grid={{ x: n.x, y: n.y, w: n.w, maxW: 3, h: n.h }}>{n.i}</div>
+              {tasks.map((n, i) => (
+                <div key={i} data-grid={{ x: n.x, y: n.y, w: 3, maxW: 3, h: n.h }}>{n.taskName}</div>
               ))}
               {/* <div key="a" data-grid={{ x: 0, y: 0, w: 2, maxW: 3, h: 1 }}>a</div>
               <div key="b" data-grid={{ x: 1, y: 4, w: 3, maxW: 3, h: 1 }}>Saturday</div>
