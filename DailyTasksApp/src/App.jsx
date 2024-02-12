@@ -32,7 +32,53 @@ function App() {
   })
   const [tasks, setTasks] = useState([])
 
+  const adjustLayout = (items) => {
+    let currentX = 0;
 
+    return items.map((item, index) => {
+      const newItem = {
+        ...item,
+        dataGrid: {
+          ...item.dataGrid,
+          x: currentX,
+        },
+      };
+
+      currentX += item.dataGrid.w;
+
+      return newItem;
+    });
+  };
+
+  const items = [
+    {
+      key: "a",
+      dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
+      taskName: "SaturdaySaturdaySaturdaySaturdaySaturday",
+    },
+    {
+      key: "b",
+      dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
+      taskName: "Saturday",
+    },
+    {
+      key: "c",
+      dataGrid: { x: 0, y: 4, w: 2, maxW: 3, h: 1 },
+      taskName: "Friday",
+    },
+    {
+      key: "d",
+      dataGrid: { x: 0, y: 4, w: 2, maxW: 3, h: 1 },
+      taskName: "Friday",
+    },
+    {
+      key: "e",
+      dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
+      taskName: "Saturday",
+    },
+  ];
+
+  const adjustedItems = adjustLayout(items);
  
  useEffect(() => {
   let newArr = []
@@ -125,8 +171,10 @@ setTasks(newArr)
               preventCollision={true}
               onDrop={onDrop}
             >
-              {tasks.map((n, i) => (
-                <div key={i} data-grid={{ x: n.x, y: n.y, w: 3, maxW: 3, h: n.h }}>{n.taskName}</div>
+              {adjustedItems.map((item) => (
+                <div key={item.key} data-grid={item.dataGrid}>
+                  {item.taskName}
+                </div>
               ))}
               {/* <div key="a" data-grid={{ x: 0, y: 0, w: 2, maxW: 3, h: 1 }}>a</div>
               <div key="b" data-grid={{ x: 1, y: 4, w: 3, maxW: 3, h: 1 }}>Saturday</div>
