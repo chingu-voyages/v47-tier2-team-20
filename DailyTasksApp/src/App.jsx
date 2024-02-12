@@ -55,27 +55,27 @@ function App() {
     {
       key: "a",
       dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
-      content: "SaturdaySaturdaySaturdaySaturdaySaturday",
+      taskName: "SaturdaySaturdaySaturdaySaturdaySaturday",
     },
     {
       key: "b",
       dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
-      content: "Saturday",
+      taskName: "Saturday",
     },
     {
       key: "c",
       dataGrid: { x: 0, y: 4, w: 2, maxW: 3, h: 1 },
-      content: "Friday",
+      taskName: "Friday",
     },
     {
       key: "d",
       dataGrid: { x: 0, y: 4, w: 2, maxW: 3, h: 1 },
-      content: "Friday",
+      taskName: "Friday",
     },
     {
       key: "e",
       dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
-      content: "Saturday",
+      taskName: "Saturday",
     },
   ];
 
@@ -174,7 +174,7 @@ function App() {
             >
               {adjustedItems.map((item) => (
                 <div key={item.key} data-grid={item.dataGrid}>
-                  {item.content}
+                  {item.taskName}
                 </div>
               ))}
               {/* <div key="a" data-grid={{ x: 0, y: 0, w: 2, maxW: 3, h: 1 }}>a</div>
