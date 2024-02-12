@@ -33,44 +33,91 @@ function App() {
   const [tasks, setTasks] = useState([])
 
 
- 
- useEffect(() => {
-  let newArr = []
-  let taskNames = data.map(n => {
-    return n.activityTypes.map(n => {
-      return n.Tasks.map(n => {
-        if(days[n.days[0]]){
-          n.y = days[n.days[0]].y
-          n.x = days[n.days[0]].x
-          n.h = n.days.length
-          console.log('before', n)
-          // for(let day of n.days){
-          //   setDays({...days, [day]:{y: days[day].y, x: days[day].x++ }})
-          // }
-          setDays({...days, [n.days[0]]: {...days[n.days[0]], x : days[n.days[0]].x++} })
-          newArr.push(n)
-          console.log('after', n)
-        }
-        // for (let day of n.days) {
-        //   if(days[day]) {
-        //     n.y = days[day].y
-        //     n.x = days[day].x
-        //     console.log('days[day].x', days[day].x)
-        //     console.log(n)
-        //     setDays({...days, [day]:{y: days[day].y, x: days[day].x++ }})
-        //     setTasks([...tasks,n])
-        //     newArr.push(n)
-        //   }
-        // }
-      }
-      )
-    })
-  })
-console.log(newArr)
-setTasks(newArr)
-  // setTasks(taskNames)
+  const adjustLayout = (items) => {
+    let currentX = 0;
 
- }, [])
+    return items.map((item, index) => {
+      const newItem = {
+        ...item,
+        dataGrid: {
+          ...item.dataGrid,
+          x: currentX,
+        },
+      };
+
+      currentX += item.dataGrid.w;
+
+      return newItem;
+    });
+  };
+
+  const items = [
+    {
+      key: "a",
+      dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
+      content: "SaturdaySaturdaySaturdaySaturdaySaturday",
+    },
+    {
+      key: "b",
+      dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
+      content: "Saturday",
+    },
+    {
+      key: "c",
+      dataGrid: { x: 0, y: 4, w: 2, maxW: 3, h: 1 },
+      content: "Friday",
+    },
+    {
+      key: "d",
+      dataGrid: { x: 0, y: 4, w: 2, maxW: 3, h: 1 },
+      content: "Friday",
+    },
+    {
+      key: "e",
+      dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
+      content: "Saturday",
+    },
+  ];
+
+  const adjustedItems = adjustLayout(items);
+ 
+  useEffect(() => {
+    let newArr = []
+    let taskNames = data.map(n => {
+      return n.activityTypes.map(n => {
+        return n.Tasks.map(n => {
+          if(days[n.days[0]]){
+            n.y = days[n.days[0]].y
+            n.x = days[n.days[0]].x
+            n.h = n.days.length
+            console.log('before', n)
+            // for(let day of n.days){
+            //   setDays({...days, [day]:{y: days[day].y, x: days[day].x++ }})
+            // }
+            setDays({...days, [n.days[0]]: {...days[n.days[0]], x : days[n.days[0]].x++} })
+            newArr.push(n)
+            console.log('after', n)
+          }
+          // for (let day of n.days) {
+          //   if(days[day]) {
+          //     n.y = days[day].y
+          //     n.x = days[day].x
+          //     console.log('days[day].x', days[day].x)
+          //     console.log(n)
+          //     setDays({...days, [day]:{y: days[day].y, x: days[day].x++ }})
+          //     setTasks([...tasks,n])
+          //     newArr.push(n)
+          //   }
+          // }
+        }
+        )
+      })
+    })
+  console.log(newArr)
+  setTasks(newArr)
+    // setTasks(taskNames)
+  
+  }, [])
 
 
   const onDrop = (layout, layoutItem, _event) => {
@@ -89,10 +136,10 @@ setTasks(newArr)
         className="droppable-element"
         draggable={true}
         unselectable='on'
-      // unselectable="on"
-      // onDragStart={(e) => {
-      //   e.dataTransfer.setData("text/plain", "");
-      // }}
+        // unselectable="on"
+        // onDragStart={(e) => {
+        //   e.dataTransfer.setData("text/plain", "");
+        // }}
       >
         (Drag me!)
       </div>
@@ -125,8 +172,10 @@ setTasks(newArr)
               preventCollision={true}
               onDrop={onDrop}
             >
-              {tasks.map((n, i) => (
-                <div key={i} data-grid={{ x: n.x, y: n.y, w: 3, maxW: 3, h: n.h }}>{n.taskName}</div>
+              {adjustedItems.map((item) => (
+                <div key={item.key} data-grid={item.dataGrid}>
+                  {item.content}
+                </div>
               ))}
               {/* <div key="a" data-grid={{ x: 0, y: 0, w: 2, maxW: 3, h: 1 }}>a</div>
               <div key="b" data-grid={{ x: 1, y: 4, w: 3, maxW: 3, h: 1 }}>Saturday</div>
