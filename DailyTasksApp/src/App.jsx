@@ -8,29 +8,51 @@ import Header from './components/Header';
 import SideBar from './components/SideBar';
 import Category from './components/Category';
 
-const layout = [
-  { i: "a", x: 0, y: 0, w: 1, h: 1 },
-  { i: "b", x: 1, y: 0, w: 1, h: 1 },
-  { i: "c", x: 2, y: 6, w: 3, h: 1 },
-  { i: "d", x: 3, y: 0, w: 1, h: 1 },
-  { i: "e", x: 4, y: 0, w: 1, h: 1 },
-  { i: "f", x: 5, y: 0, w: 1, h: 1 },
-  { i: "g", x: 6, y: 0, w: 1, h: 1 },
-  { i: "h", x: 3, y: 3, w: 1, h: 1 }
+const items = [
+  {
+    key: "a",
+    dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
+    taskName: "Monday",
+  },
+  {
+    key: "b",
+    dataGrid: { x: 0, y: 1, w: 2, maxW: 3, h: 1 },
+    taskName: "Saturday",
+  },
+  {
+    key: "c",
+    dataGrid: { x: 0, y: 2, w: 2, maxW: 3, h: 1 },
+    taskName: "Friday",
+  },
+  {
+    key: "d",
+    dataGrid: { x: 0, y: 3, w: 2, maxW: 3, h: 1 },
+    taskName: "test2",
+  },
+  {
+    key: "e",
+    dataGrid: { x: 0, y: 4, w: 2, maxW: 3, h: 1 },
+    taskName: "test3",
+  },
+  {
+    key: "f",
+    dataGrid: { x: 1, y: 5, w: 1, maxW: 3, h: 1 },
+    taskName: "test",
+  }
 ];
+
 function App() {
-  const [staticLayout, setStaticLayout] = useState(layout)
   const [taskName, setTaskName] = useState("")
-  const [days, setDays] = useState({
-    monday: {y:0, x:0},
-    tuesday: {y:1, x:0},
-    wednesday: {y:2, x:0},
-    thursday: {y:3, x:0},
-    friday: {y:4, x:0},
-    saturday: {y:5, x:0},
-    sunday: {y:6, x:0}
-  })
-  const [tasks, setTasks] = useState([])
+  // const [days, setDays] = useState({
+  //   monday: {y:0, x:0},
+  //   tuesday: {y:1, x:0},
+  //   wednesday: {y:2, x:0},
+  //   thursday: {y:3, x:0},
+  //   friday: {y:4, x:0},
+  //   saturday: {y:5, x:0},
+  //   sunday: {y:6, x:0}
+  // })
+  const [tasks, setTasks] = useState([...items])
 
   const adjustLayout = (items) => {
     let currentX = 0;
@@ -50,75 +72,8 @@ function App() {
     });
   };
 
-  const items = [
-    {
-      key: "a",
-      dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
-      taskName: "SaturdaySaturdaySaturdaySaturdaySaturday",
-    },
-    {
-      key: "b",
-      dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
-      taskName: "Saturday",
-    },
-    {
-      key: "c",
-      dataGrid: { x: 0, y: 4, w: 2, maxW: 3, h: 1 },
-      taskName: "Friday",
-    },
-    {
-      key: "d",
-      dataGrid: { x: 0, y: 4, w: 2, maxW: 3, h: 1 },
-      taskName: "Friday",
-    },
-    {
-      key: "e",
-      dataGrid: { x: 0, y: 0, w: 2, maxW: 3, h: 1 },
-      taskName: "Saturday",
-    },
-  ];
-
-  const adjustedItems = adjustLayout(items);
+  const adjustedItems = adjustLayout(tasks);
  
- useEffect(() => {
-  let newArr = []
-  let taskNames = data.map(n => {
-    return n.activityTypes.map(n => {
-      return n.Tasks.map(n => {
-        if(days[n.days[0]]){
-          n.y = days[n.days[0]].y
-          n.x = days[n.days[0]].x
-          n.h = n.days.length
-          console.log('before', n)
-          // for(let day of n.days){
-          //   setDays({...days, [day]:{y: days[day].y, x: days[day].x++ }})
-          // }
-          setDays({...days, [n.days[0]]: {...days[n.days[0]], x : days[n.days[0]].x++} })
-          newArr.push(n)
-          console.log('after', n)
-        }
-        // for (let day of n.days) {
-        //   if(days[day]) {
-        //     n.y = days[day].y
-        //     n.x = days[day].x
-        //     console.log('days[day].x', days[day].x)
-        //     console.log(n)
-        //     setDays({...days, [day]:{y: days[day].y, x: days[day].x++ }})
-        //     setTasks([...tasks,n])
-        //     newArr.push(n)
-        //   }
-        // }
-      }
-      )
-    })
-  })
-console.log(newArr)
-setTasks(newArr)
-  // setTasks(taskNames)
-
- }, [])
-
-
   const onDrop = (layout, layoutItem, _event) => {
     console.log(layoutItem)
     layoutItem.isResiable = true
@@ -126,9 +81,16 @@ setTasks(newArr)
     layoutItem.moved = true
     layoutItem.resizeHandles = true
     layoutItem.i = taskName
-    setStaticLayout([...staticLayout, layoutItem])
+    console.log('layoutitem', layoutItem)
+    setTasks([...tasks, {
+      key: layoutItem.i,
+       dataGrid: { x: layoutItem.x, y: layoutItem.y, w: layoutItem.w, maxW: 3, h: 1 },
+       taskName: taskName
+    }])
+    console.log('tasks', tasks)
     alert(`Dropped element props:\n${JSON.stringify(layoutItem, ['x', 'y', 'w', 'h'], 2)}`);
   };
+console.log('adjusteditems', adjustedItems)
   return (
     <>
       <div
@@ -171,7 +133,7 @@ setTasks(newArr)
               preventCollision={true}
               onDrop={onDrop}
             >
-              {adjustedItems.map((item) => (
+              {tasks.map((item) => (
                 <div key={item.key} data-grid={item.dataGrid}>
                   {item.taskName}
                 </div>
@@ -185,7 +147,7 @@ setTasks(newArr)
               <div key="g" data-grid={{ x: 3, y: 3, w: 1, maxW: 3, h: 1 }}>g</div>
               <div key="h" data-grid={{ x: 1, y: 6, w: 1, maxW: 3, h: 1 }}>h</div>
               <div key="i" data-grid={{ x: 0, y: 6, w: 1, maxW: 3, h: 1 }}>i</div>
-              <div key="j" data-grid={{ x: 0, y: 7, w: 1, maxW: 3, h: 1 }}>New Item</div> */}
+              <div key="j" data-grid={{ x: 0, y: 1, w: 1, maxW: 3, h: 1 }}>New Item</div>  */}
             </GridLayout>
           </div>
         </div>
