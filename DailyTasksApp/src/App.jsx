@@ -4,45 +4,52 @@ import { useState } from 'react'
 import GridLayout from "react-grid-layout";
 import './App.css'
 import data from './assets.json'
-// import List from './components/List'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
-// const ResponsiveGridLayout = WidthProvider(Responsive);
+
 const layout = [
-  { i: "a", x: 0, y: 0, w: 1, h: 1 },
-  { i: "b", x: 1, y: 0, w: 1, h: 1 },
-  { i: "c", x: 2, y: 6, w: 3, h: 1 },
-  { i: "d", x: 3, y: 0, w: 1, h: 1 },
-  { i: "e", x: 4, y: 0, w: 1, h: 1 },
-  { i: "f", x: 5, y: 0, w: 1, h: 1 },
-  { i: "g", x: 6, y: 0, w: 1, h: 1 },
-  { i: "h", x: 3, y: 3, w: 1, h: 1 }
+  { i: "a", x: 0, y: 0, w: 1, h: 1, taskName: 'a' },
+  { i: "b", x: 1, y: 0, w: 1, h: 1, taskName: 'b' },
+  { i: "c", x: 2, y: 6, w: 3, h: 1, taskName: 'c' },
+  { i: "d", x: 3, y: 0, w: 1, h: 1, taskName: 'd' },
+  { i: "e", x: 4, y: 0, w: 1, h: 1, taskName: 'e' },
+  { i: "f", x: 5, y: 0, w: 1, h: 1, taskName: 'f' },
+  { i: "g", x: 6, y: 0, w: 1, h: 1, taskName: 'g' },
+  { i: "h", x: 3, y: 3, w: 1, h: 1, taskName: 'h' }
 ];
 function App() {
-  const [currentDimensions, setCurrentDimensions] = useState({ w: 5, h: 2 })
-  const [staticLayout, setStaticLayout] = useState(layout)
+  const [staticLayout, setStaticLayout] = useState(JSON.parse(window.localStorage.getItem("staticLayout")))
   const [taskName, setTaskName] = useState("")
  
   const onDrop = (layout, layoutItem, _event) => {
-    console.log(layoutItem)
-    layoutItem.isResiable = true
+    console.log('newItem', layout)
+    layoutItem.isResizable = true
     layoutItem.static = true
-    layoutItem.moved = true
+    layoutItem.moved = false
     layoutItem.resizeHandles = true
     layoutItem.i = taskName
-    setStaticLayout([...staticLayout, layoutItem])
-    alert(`Dropped element props:\n${JSON.stringify(layoutItem, ['x', 'y', 'w', 'h'], 2)}`);
+    setStaticLayout([...layout])
+
   };
+  function saveToLS(layout) {
+    if (window.localStorage) {
+      window.localStorage.setItem(
+        "staticLayout",
+        JSON.stringify(layout)
+      );
+    }
+  }
+  console.log('staticLayout', staticLayout)
+  function onLayoutChange (layout, oldItem, newItem) {
+console.log(layout)
+    saveToLS(layout)
+  }
   return (
     <>
       <div
         className="droppable-element"
         draggable={true}
         unselectable='on'
-        // unselectable="on"
-        // onDragStart={(e) => {
-        //   e.dataTransfer.setData("text/plain", "");
-        // }}
       >
         (Drag me!)
       </div>
@@ -60,7 +67,6 @@ function App() {
               <p>Friday</p>
               <p>Saturday</p>
               <p>Sunday</p>
-
             </div>
 
             <GridLayout
@@ -69,34 +75,21 @@ function App() {
               cols={12}
               rowHeight={30}
               width={1200}
-              // droppingItem= {{ i: "z", w: 2, h: 2 }}
-              // This turns off compaction so you can place items wherever.
+              onLayoutChange={onLayoutChange}
+              // onDrag={onLayoutChange}
               verticalCompact={false}
-              // preventCollision= {false}
-              // preventCollision={!this.state.compactType}
+              allowOverlap={false}
+            
               isDroppable={true}
               draggable={true}
-              // measureBeforeMount={false}
+              measureBeforeMount={false}
               preventCollision={true}
-
-              // onDropDragOver= {(e) => ({ i: layout.length, w:2, h:1 }) }
               onDrop={onDrop}
-      
-
             >
               {staticLayout.map ((n, i) => (
-                <div key={i} data-grid={{ x: n.x, y: n.y, w: n.w, maxW: 3, h: n.h }}>{n.i}</div>
+                <div key={n.i} data-grid={{ x: n.x, y: n.y, w: n.w, maxW: 3, h: n.h }}>{n.i}</div>
               ))}
-              {/* <div key="a" data-grid={{ x: 0, y: 0, w: 2, maxW: 3, h: 1 }}>a</div>
-              <div key="b" data-grid={{ x: 1, y: 4, w: 3, maxW: 3, h: 1 }}>Saturday</div>
-              <div key="c" data-grid={{ x: 2, y: 6, w: 1, maxW: 3, h: 1 }}>c</div>
-              <div key="d" data-grid={{ x: 3, y: 6, w: 1, maxW: 3, h: 1 }}>d</div>
-              <div key="e" data-grid={{ x: 4, y: 6, w: 1, maxW: 3, h: 1 }}>e</div>
-              <div key="f" data-grid={{ x: 5, y: 2, w: 1, maxW: 3, h: 1 }}>f</div>
-              <div key="g" data-grid={{ x: 3, y: 3, w: 1, maxW: 3, h: 1 }}>g</div>
-              <div key="h" data-grid={{ x: 1, y: 6, w: 1, maxW: 3, h: 1 }}>h</div>
-              <div key="i" data-grid={{ x: 0, y: 6, w: 1, maxW: 3, h: 1 }}>i</div>
-              <div key="j" data-grid={{ x: 0, y: 7, w: 1, maxW: 3, h: 1 }}>New Item</div> */}
+            
             </GridLayout>
           </div>
         </div>
