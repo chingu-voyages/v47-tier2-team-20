@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -6,11 +7,12 @@
 html {
   font-size: 16px;
 }
-table, th, td{
-  border: 1px solid;
+body {
+  background-color: #ffffff;
+}
+table, th, td {
   width: 100%;
 }
-
 .app {
   width: 90%;
   min-height: 90vh;
@@ -39,7 +41,7 @@ table, th, td {
 }
 
 .layout div {
-  background-color: blue;
+  background-color: #c8e9f1;
   min-width: 5%!important;
 }
 .days-container {
@@ -53,11 +55,32 @@ table, th, td {
   flex-direction: column;
   max-height:280px;
   padding-top: 10px;
-
+  background: #ebebeb;
+  border: 1px solid #808080;
+  border-right: none;
 }
 .days p {
-  background-color: aqua;
+  background-color: #ebebeb;
+  border-bottom: 1px solid #808080;
   height: 30px;
+  padding: 0 10px;
+  text-align: center;
+}
+.days p:nth-child(7) {
+  border-bottom: none;
+}
+.react-grid-layout {
+  background: #c8e9f1;
+  border: 1px solid #808080;
+  display: grid;
+  flex-wrap: wrap;
+  grid-gap: 0px;
+  grid-template-columns: repeat(auto-fill, minmax(705px, 1fr));
+  text-align: center;
+}
+.react-grid-item {
+  border: 1px solid #808080;
+  text-align: center;
 }
 /* Task Colours Added Dynamimically */
 .blue-highlight {
@@ -84,8 +107,13 @@ table, th, td {
   font-family: Open Sans;
   font-size: 2em;
   justify-content: center;
-  padding: 0 0 0 25%;
+  padding: 0 0 2% 25%;
   width: 90%;
+}
+input[type=checkbox] {
+  height: 30px;
+  margin: 0 0 0 1%;
+  width: 30px;
 }
 /* FOOTER */
 .footer {
@@ -104,9 +132,4 @@ table, th, td {
   color: #000000;
   font-size: 2em;
   text-decoration: none;
-}
-input[type=checkbox] {
-  height: 30px;
-  margin: 0 0 0 1%;
-  width: 30px;
 }
