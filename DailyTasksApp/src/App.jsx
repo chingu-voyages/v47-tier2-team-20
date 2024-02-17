@@ -1,6 +1,6 @@
 import '../node_modules/react-grid-layout/css/styles.css';
 import '../node_modules/react-resizable/css/styles.css';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import GridLayout from "react-grid-layout";
 import './App.css'
 import data from './assets.json'
@@ -22,11 +22,11 @@ const layout = [
 function App() {
   
 
-  const [staticLayout, setStaticLayout] = useState(JSON.parse(window.localStorage.getItem("staticLayout"))) || useState(layout)
+  const [staticLayout, setStaticLayout] = useState(layout)
   const [taskName, setTaskName] = useState("")
  
-
-
+  useEffect(() => setStaticLayout(JSON.parse(window.localStorage.getItem("staticLayout"))),[] )
+  
   const onDrop = (layout, layoutItem, _event) => {
     console.log('newItem', layout)
     layoutItem.isResizable = true
