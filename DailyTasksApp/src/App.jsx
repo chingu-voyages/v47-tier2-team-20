@@ -8,19 +8,23 @@ import Header from './components/Header'
 import SideBar from './components/SideBar'
 
 const layout = [
-  { i: "a", x: 0, y: 0, w: 1, h: 1, taskName: 'a' },
-  { i: "b", x: 1, y: 0, w: 1, h: 1, taskName: 'b' },
-  { i: "c", x: 2, y: 6, w: 3, h: 1, taskName: 'c' },
-  { i: "d", x: 3, y: 0, w: 1, h: 1, taskName: 'd' },
-  { i: "e", x: 4, y: 0, w: 1, h: 1, taskName: 'e' },
-  { i: "f", x: 5, y: 0, w: 1, h: 1, taskName: 'f' },
-  { i: "g", x: 6, y: 0, w: 1, h: 1, taskName: 'g' },
-  { i: "h", x: 3, y: 3, w: 1, h: 1, taskName: 'h' }
+  { i: "studying", x: 0, y: 0, w: 1, h: 1 },
+  { i: "coding", x: 1, y: 0, w: 1, h: 1},
+  { i: "cleaning", x: 2, y: 6, w: 3, h: 1  },
+  { i: "garbage duty", x: 3, y: 0, w: 2, h: 1  },
+  { i: "eating", x: 4, y: 0, w: 1, h: 1},
+  { i: "tennis", x: 5, y: 0, w: 1, h: 1  },
+  { i: "walking dogs", x: 6, y: 0, w: 1, h: 1 },
+  { i: "climbing trees", x: 3, y: 3, w: 1, h: 2  }
 ];
 function App() {
-  const [staticLayout, setStaticLayout] = useState(JSON.parse(window.localStorage.getItem("staticLayout")))
+  
+
+  const [staticLayout, setStaticLayout] = useState(JSON.parse(window.localStorage.getItem("staticLayout"))) || useState(layout)
   const [taskName, setTaskName] = useState("")
  
+
+
   const onDrop = (layout, layoutItem, _event) => {
     console.log('newItem', layout)
     layoutItem.isResizable = true
