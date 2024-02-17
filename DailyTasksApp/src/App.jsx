@@ -61,7 +61,7 @@ console.log(layout)
       <div className="app">
         <Header />
         <div className='wrapper'>
-          <SideBar data={data} />
+          {/* <SideBar data={data} /> */}
           <div className="days-container">
             <div className="days">
               <p>Monday</p>
