@@ -20,12 +20,16 @@ const layout = [
   { i: "climbing trees", x: 3, y: 3, w: 1, h: 2  }
 ];
 function App() {
-  
 
-  const [staticLayout, setStaticLayout] = useState(layout)
+  if(!window.localStorage.staticLayout){
+    window.localStorage.setItem(
+      "staticLayout",
+      JSON.stringify(layout)
+    );
+  }
+
+  const [staticLayout, setStaticLayout] = useState(JSON.parse(window.localStorage.getItem("staticLayout")))
   const [taskName, setTaskName] = useState("")
- 
-  useEffect(() => setStaticLayout(JSON.parse(window.localStorage.getItem("staticLayout"))),[] )
   
   const onDrop = (layout, layoutItem, _event) => {
     console.log('newItem', layout)
